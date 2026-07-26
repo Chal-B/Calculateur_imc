@@ -1,0 +1,560 @@
+:root {
+  --ardoise: #1a3a52;
+  --ardoise-profonde: #0f2740;
+  --grille: rgba(180, 210, 230, 0.08);
+  --trait: rgba(220, 235, 245, 0.22);
+  --trait-fort: rgba(236, 245, 252, 0.45);
+  --papier: #e8f1f7;
+  --encre: #dceaf3;
+  --encre-douce: #9bb4c7;
+  --signal: #f0c419;
+  --fiche: rgba(15, 39, 64, 0.72);
+
+  --maigreur: #6fa8c9;
+  --maigreur-fond: rgba(111, 168, 201, 0.18);
+  --normal: #7ec8a3;
+  --normal-fond: rgba(126, 200, 163, 0.18);
+  --surpoids: #e0b84a;
+  --surpoids-fond: rgba(224, 184, 74, 0.18);
+  --obesite: #e07a6a;
+  --obesite-fond: rgba(224, 122, 106, 0.18);
+
+  --police-titre: "Allerta Stencil", "Arial Black", sans-serif;
+  --police-corps: "Source Sans 3", "Segoe UI", sans-serif;
+  --police-code: "IBM Plex Mono", Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+@media (max-height: 700px) {
+  html,
+  body {
+    height: auto;
+    min-height: 100%;
+    overflow: auto;
+  }
+
+  body {
+    padding: 0.85rem 0;
+  }
+
+  .ecran {
+    height: auto;
+    min-height: min(640px, calc(100vh - 2rem));
+  }
+
+  .panneau {
+    overflow: visible;
+  }
+}
+
+body {
+  display: grid;
+  place-items: center;
+  font-family: var(--police-corps);
+  color: var(--encre);
+  background-color: var(--ardoise-profonde);
+  background-image:
+    linear-gradient(var(--grille) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grille) 1px, transparent 1px),
+    radial-gradient(ellipse at top, var(--ardoise) 0%, var(--ardoise-profonde) 70%);
+  background-size: 24px 24px, 24px 24px, 100% 100%;
+}
+
+.evitement {
+  position: absolute;
+  left: -9999px;
+  top: 0.75rem;
+  z-index: 10;
+  padding: 0.55rem 0.9rem;
+  background: var(--signal);
+  color: var(--ardoise-profonde);
+  font-weight: 700;
+}
+
+.evitement:focus {
+  left: 0.75rem;
+}
+
+.ecran {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+  width: min(1100px, calc(100vw - 2rem));
+  height: min(640px, calc(100vh - 2rem));
+}
+
+.panneau {
+  height: 100%;
+  padding: 1.75rem 1.6rem;
+  border: 1px solid var(--trait);
+  background: var(--fiche);
+  overflow: hidden;
+}
+
+.panneau-saisie {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.etiquette {
+  display: inline-block;
+  align-self: start;
+  margin-bottom: 0.85rem;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--signal);
+  color: var(--signal);
+  font-family: var(--police-titre);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+}
+
+h1 {
+  margin-bottom: 0.65rem;
+  font-family: var(--police-titre);
+  font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  color: var(--papier);
+}
+
+.chapeau {
+  max-width: 36ch;
+  margin-bottom: 1.5rem;
+  color: var(--encre-douce);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.formulaire {
+  display: grid;
+  gap: 0.95rem;
+  margin-bottom: 1.2rem;
+}
+
+.champ {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.champ-libelle {
+  font-family: var(--police-titre);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--encre-douce);
+  text-transform: uppercase;
+}
+
+.champ-ligne {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding-right: 0.85rem;
+  border: 1px solid var(--trait);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.champ-ligne:focus-within {
+  border-color: var(--signal);
+  box-shadow: 0 0 0 2px rgba(240, 196, 25, 0.18);
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 0.85rem 0.9rem;
+  border: 0;
+  background: transparent;
+  color: var(--papier);
+  font: inherit;
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="number"]:focus {
+  outline: none;
+}
+
+.unite {
+  color: var(--signal);
+  font-family: var(--police-titre);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.bouton {
+  margin-top: 0.25rem;
+  padding: 0.95rem 1.15rem;
+  border: 1.5px solid var(--signal);
+  background: var(--signal);
+  color: var(--ardoise-profonde);
+  font-family: var(--police-titre);
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.bouton:hover {
+  background: #ffe566;
+}
+
+.bouton:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+.formule {
+  margin-bottom: 0.55rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--trait);
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--signal);
+  font-family: var(--police-code);
+  font-size: 0.84rem;
+  text-align: center;
+}
+
+.note {
+  color: var(--encre-douce);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.panneau-resultat {
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(165deg, rgba(26, 58, 82, 0.55) 0%, rgba(15, 39, 64, 0.85) 100%);
+}
+
+.attente {
+  max-width: 22ch;
+  color: var(--encre-douce);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.fiche {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+  justify-items: center;
+  gap: 0.85rem;
+  text-align: center;
+}
+
+.fiche-bandeau {
+  justify-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--trait);
+  background: rgba(240, 196, 25, 0.07);
+}
+
+.fiche-numero {
+  font-family: var(--police-titre);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--signal);
+}
+
+.fiche-zone-tag {
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--trait);
+  color: var(--encre-douce);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.silhouette {
+  --corpulence: 1;
+  --ventre: 0.92;
+  --bras-epaisseur: 10;
+  --jambe-epaisseur: 11;
+  --ecart-membres: 0px;
+  width: min(160px, 40%);
+  height: auto;
+  color: var(--normal);
+}
+
+.silhouette * {
+  transform-box: view-box;
+}
+
+.tete,
+.torse,
+.ventre {
+  fill: currentColor;
+}
+
+.membre {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+}
+
+.bras {
+  stroke-width: var(--bras-epaisseur);
+}
+
+.jambe {
+  stroke-width: var(--jambe-epaisseur);
+}
+
+.torse {
+  transform-origin: 60px 72px;
+  transform: scaleX(var(--corpulence));
+}
+
+.ventre {
+  transform-origin: 60px 82px;
+  transform: scaleX(var(--ventre));
+}
+
+.bras-gauche {
+  transform: translateX(calc(var(--ecart-membres) * -1));
+}
+
+.bras-droit {
+  transform: translateX(var(--ecart-membres));
+}
+
+.jambe-gauche {
+  transform: translateX(calc(var(--ecart-membres) * -0.55));
+}
+
+.jambe-droite {
+  transform: translateX(calc(var(--ecart-membres) * 0.55));
+}
+
+.fiche-detail {
+  width: min(360px, 100%);
+  padding: 0 0.75rem 0.9rem;
+}
+
+.valeur-imc {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+  line-height: 1;
+}
+
+.valeur-imc strong {
+  font-family: var(--police-titre);
+  font-size: clamp(2.6rem, 5vw, 3.4rem);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.valeur-imc span {
+  color: var(--encre-douce);
+  font-family: var(--police-titre);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+.categorie {
+  margin-bottom: 0.45rem;
+  font-family: var(--police-titre);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.message {
+  margin-bottom: 0.9rem;
+  color: var(--encre-douce);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.mesures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+  margin-bottom: 0.9rem;
+}
+
+.mesure {
+  padding: 0.6rem 0.55rem;
+  border: 1px solid var(--trait);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.mesure strong {
+  display: block;
+  font-family: var(--police-code);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--papier);
+}
+
+.mesure span {
+  color: var(--encre-douce);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.jauge {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.3rem;
+}
+
+.segment {
+  padding: 0.35rem 0.15rem;
+  border: 1px solid var(--trait);
+  background: rgba(0, 0, 0, 0.18);
+  color: var(--encre-douce);
+  font-family: var(--police-titre);
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+}
+
+.maigreur .silhouette {
+  --corpulence: 0.76;
+  --ventre: 0.56;
+  --bras-epaisseur: 8;
+  --jambe-epaisseur: 9;
+  --ecart-membres: -3px;
+  color: var(--maigreur);
+}
+
+.maigreur .valeur-imc strong,
+.maigreur .categorie,
+.maigreur .fiche-zone-tag {
+  color: var(--maigreur);
+  border-color: var(--maigreur);
+}
+
+.maigreur .segment-maigreur {
+  background: var(--maigreur-fond);
+  border-color: var(--maigreur);
+  color: var(--maigreur);
+}
+
+.normal .silhouette {
+  --corpulence: 1;
+  --ventre: 0.92;
+  --bras-epaisseur: 10;
+  --jambe-epaisseur: 11;
+  --ecart-membres: 0px;
+  color: var(--normal);
+}
+
+.normal .valeur-imc strong,
+.normal .categorie,
+.normal .fiche-zone-tag {
+  color: var(--normal);
+  border-color: var(--normal);
+}
+
+.normal .segment-normal {
+  background: var(--normal-fond);
+  border-color: var(--normal);
+  color: var(--normal);
+}
+
+.surpoids .silhouette {
+  --corpulence: 1.2;
+  --ventre: 1.3;
+  --bras-epaisseur: 12;
+  --jambe-epaisseur: 14;
+  --ecart-membres: 6px;
+  color: var(--surpoids);
+}
+
+.surpoids .valeur-imc strong,
+.surpoids .categorie,
+.surpoids .fiche-zone-tag {
+  color: var(--surpoids);
+  border-color: var(--surpoids);
+}
+
+.surpoids .segment-surpoids {
+  background: var(--surpoids-fond);
+  border-color: var(--surpoids);
+  color: var(--surpoids);
+}
+
+.obesite .silhouette {
+  --corpulence: 1.42;
+  --ventre: 1.78;
+  --bras-epaisseur: 14;
+  --jambe-epaisseur: 17;
+  --ecart-membres: 12px;
+  color: var(--obesite);
+}
+
+.obesite .valeur-imc strong,
+.obesite .categorie,
+.obesite .fiche-zone-tag {
+  color: var(--obesite);
+  border-color: var(--obesite);
+}
+
+.obesite .segment-obesite {
+  background: var(--obesite-fond);
+  border-color: var(--obesite);
+  color: var(--obesite);
+}
+
+.erreur {
+  color: var(--obesite);
+  font-size: 0.92rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+@media (max-width: 900px) {
+  html,
+  body {
+    height: auto;
+    overflow: auto;
+  }
+
+  body {
+    display: block;
+    padding: 0.85rem;
+  }
+
+  .ecran {
+    grid-template-columns: 1fr;
+    width: min(520px, 100%);
+    height: auto;
+    margin: 0 auto 1rem;
+  }
+
+  .panneau {
+    height: auto;
+    min-height: 420px;
+    padding: 1.35rem;
+  }
+
+  .panneau-resultat {
+    min-height: 480px;
+  }
+}
