@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fiche technique IMC : calculez votre indice à partir du poids et de la taille.">
+  <title>Fiche IMC — Plan technique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="evitement" href="#contenu">Aller au contenu</a>
+
+  <div class="ecran" id="contenu">
+    <aside class="panneau panneau-saisie">
+      <p class="etiquette">Réf. IMC · FICHE DE CALCUL</p>
+      <h1>Indice de masse corporelle</h1>
+      <p class="chapeau">
+        Saisissez poids et taille. Le panneau de droite affiche la zone OMS
+        et une silhouette adaptée aux proportions.
+      </p>
+
+      <form class="formulaire" id="formulaire-imc">
+        <label class="champ">
+          <span class="champ-libelle">Poids</span>
+          <span class="champ-ligne">
+            <input
+              type="number"
+              id="poids"
+              name="poids"
+              min="30"
+              max="250"
+              step="0.1"
+              value="70"
+              required
+            >
+            <span class="unite">kg</span>
+          </span>
+        </label>
+
+        <label class="champ">
+          <span class="champ-libelle">Taille</span>
+          <span class="champ-ligne">
+            <input
+              type="number"
+              id="taille"
+              name="taille"
+              min="1"
+              max="2.5"
+              step="0.01"
+              value="1.75"
+              required
+            >
+            <span class="unite">m</span>
+          </span>
+        </label>
+
+        <button type="submit" class="bouton">Lancer le calcul</button>
+      </form>
+
+      <p class="formule">IMC = poids ÷ (taille × taille)</p>
+      <p class="note">
+        Indicateur général chez l'adulte. Ce n'est pas un diagnostic médical.
+      </p>
+    </aside>
+
+    <section class="panneau panneau-resultat" id="sortie" aria-live="polite">
+      <p class="attente">En attente des mesures…</p>
+    </section>
+  </div>
+
+  <script src="imc.js"></script>
+</body>
+</html>
