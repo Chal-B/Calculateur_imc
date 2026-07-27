@@ -1,0 +1,16 @@
+# Système / éditeur
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+.idea/
+.vscode/
+*.swp
+
+# Environnement
+.env
+.env.*
+
+# Dépendances
+node_modules/
+npm-debug.log*
